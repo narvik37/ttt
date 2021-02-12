@@ -74,8 +74,31 @@ class Menu(object):
         self.screen.blit(mytext, rect)
         return rect
     
+    def check_rect(self, pos):
+        if self.new_btn.collidepoint(pos):
+            return True
+        elif self.quit_btn.collidepoint(pos):
+            terminate()
+        return False
+
+    def is_continue(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    terminate()
+                elif event.type == MOUSEBUTTONUP:
+                    if(self.check_rect(event.pos)):
+                        return
+            pygame.display.update()
+            clock.tick(fps)
+
 # TTT
 # run_game
+# terminate
+
+def terminate():
+    pygame.quit()
+    sys.exit()
 
 
 
